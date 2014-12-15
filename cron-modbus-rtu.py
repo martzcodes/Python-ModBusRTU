@@ -45,21 +45,21 @@ for mod in mods:
 
         if mod['parity'] == "N":
             instrument.serial.parity = serial.PARITY_NONE
-
-        writestring = ("{}").format(d.hour*60*60+d.minute*60+d.second)
+            
+        writestring = ("{},{}").format(d.hour*60*60+d.minute*60+d.second,channel['channel'])
         for register in mod['registers']:
             writestring += ","
             value = -1
             if register['only'] == "" or register['only'] == channel['type']:
                 try:
-                    x = instrument.read_int(register['register'])
+                    x = instrument.read_register(register['register'])
                 except IOError as e:
                     print(e)
                 if register['type'] == "scaled":
                     try:
                         y = value
-                        B = instrument.read_int(register['offset'])
-                        A = instrument.read_int(register['factor'])
+                        B = instrument.read_register(register['offset'])
+                        A = instrument.read_register(register['factor'])
                         value = (y + (B - 32768))/A
                     except IOError as e:
                         print(e)
@@ -71,5 +71,5 @@ for mod in mods:
         print(writestring)
         datafilepath = todaypath + ("{}-{}-{}.csv").format(d.year,d.month,d.day)
         datafile = open(datafilepath, 'a')
-        datafile.write(writesting)
+        datafile.write(writestring)
         datafile.close()
