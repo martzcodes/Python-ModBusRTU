@@ -1,0 +1,86 @@
+[
+    {
+        "comport"  : "COM5",
+        "baudrate":9600,
+        "bytesize":8,
+        "stopbits":1,
+        "timeout":0.05,
+        "parity":"O",
+        "force_refresh" : false,
+        "channels" : [{"channel":1,"type":"supply"},{"channel":2,"type":"return"}],
+        "registers" : [
+            {
+                "name":"Mass Flow Rate",
+                "register":2,
+                "type":"scaled",
+                "offset":19,
+                "factor":29,
+                "only":""
+            },
+            {
+                "name":"Density",
+                "register":3,
+                "type":"scaled",
+                "offset":20,
+                "factor":30,
+                "only":""
+            },
+            {
+                "name":"Temperature",
+                "register":4,
+                "type":"scaled",
+                "offset":22,
+                "factor":32,
+                "only":""
+            },
+            {
+                "name":"Volume Flow Rate",
+                "register":5,
+                "type":"scaled",
+                "offset":23,
+                "factor":33,
+                "only":""
+            },
+            {
+                "name":"Pressure",
+                "register":7,
+                "type":"scaled",
+                "offset":24,
+                "factor":34,
+                "only":""
+            },
+            {
+                "name":"Mass Total",
+                "register":8,
+                "type":"scaled",
+                "offset":25,
+                "factor":35,
+                "only":""
+            },
+            {
+                "name":"Volume Total",
+                "register":9,
+                "type":"scaled",
+                "offset":26,
+                "factor":36,
+                "only":""
+            },
+            {
+                "name":"Mass Inventory",
+                "register":10,
+                "type":"scaled",
+                "offset":27,
+                "factor":37,
+                "only":""
+            },
+            {
+                "name":"Volume Inventory",
+                "register":11,
+                "type":"scaled",
+                "offset":28,
+                "factor":38,
+                "only":""
+            }
+        ]
+    }
+]
