@@ -1,86 +1,103 @@
 [
     {
-        "comport"  : "COM5",
-        "baudrate":9600,
-        "bytesize":8,
-        "stopbits":1,
-        "timeout":0.05,
-        "parity":"O",
-        "force_refresh" : false,
-        "channels" : [{"channel":1,"type":"supply"},{"channel":2,"type":"return"}],
-        "registers" : [
+        "baudrate": 9600,
+        "bytesize": 8,
+        "channels": [
             {
-                "name":"Mass Flow Rate",
-                "register":2,
-                "type":"scaled",
-                "offset":19,
-                "factor":29,
-                "only":""
+                "channel": 1,
+                "type": "supply"
             },
             {
-                "name":"Density",
-                "register":3,
-                "type":"scaled",
-                "offset":20,
-                "factor":30,
-                "only":""
-            },
-            {
-                "name":"Temperature",
-                "register":4,
-                "type":"scaled",
-                "offset":22,
-                "factor":32,
-                "only":""
-            },
-            {
-                "name":"Volume Flow Rate",
-                "register":5,
-                "type":"scaled",
-                "offset":23,
-                "factor":33,
-                "only":""
-            },
-            {
-                "name":"Pressure",
-                "register":7,
-                "type":"scaled",
-                "offset":24,
-                "factor":34,
-                "only":""
-            },
-            {
-                "name":"Mass Total",
-                "register":8,
-                "type":"scaled",
-                "offset":25,
-                "factor":35,
-                "only":""
-            },
-            {
-                "name":"Volume Total",
-                "register":9,
-                "type":"scaled",
-                "offset":26,
-                "factor":36,
-                "only":""
-            },
-            {
-                "name":"Mass Inventory",
-                "register":10,
-                "type":"scaled",
-                "offset":27,
-                "factor":37,
-                "only":""
-            },
-            {
-                "name":"Volume Inventory",
-                "register":11,
-                "type":"scaled",
-                "offset":28,
-                "factor":38,
-                "only":""
+                "channel": 2,
+                "type": "return"
             }
-        ]
+        ],
+        "comport": "COM5",
+        "parity": "O",
+        "registers": [
+            {
+                "factor": 28,
+                "float": 246,
+                "name": "Mass Flow Rate",
+                "offset": 18,
+                "only": "",
+                "register": 1,
+                "type": "scaled"
+            },
+            {
+                "factor": 29,
+                "float": 248,
+                "name": "Density",
+                "offset": 19,
+                "only": "",
+                "register": 2,
+                "type": "scaled"
+            },
+            {
+                "factor": 31,
+                "float": 250,
+                "name": "Temperature",
+                "offset": 21,
+                "only": "",
+                "register": 3,
+                "type": "scaled"
+            },
+            {
+                "factor": 32,
+                "float": 252,
+                "name": "Volume Flow Rate",
+                "offset": 22,
+                "only": "",
+                "register": 4,
+                "type": "scaled"
+            },
+            {
+                "factor": 33,
+                "float": -1,
+                "name": "Pressure",
+                "offset": 23,
+                "only": "",
+                "register": 6,
+                "type": "scaled"
+            },
+            {
+                "factor": 34,
+                "float": 258,
+                "name": "Mass Total",
+                "offset": 24,
+                "only": "",
+                "register": 7,
+                "type": "scaled"
+            },
+            {
+                "factor": 35,
+                "float": 260,
+                "name": "Volume Total",
+                "offset": 25,
+                "only": "",
+                "register": 8,
+                "type": "scaled"
+            },
+            {
+                "factor": 36,
+                "float": 262,
+                "name": "Mass Inventory",
+                "offset": 26,
+                "only": "",
+                "register": 9,
+                "type": "scaled"
+            },
+            {
+                "factor": 37,
+                "float": 264,
+                "name": "Volume Inventory",
+                "offset": 27,
+                "only": "",
+                "register": 10,
+                "type": "scaled"
+            }
+        ],
+        "stopbits": 1,
+        "timeout": 0.5
     }
 ]
