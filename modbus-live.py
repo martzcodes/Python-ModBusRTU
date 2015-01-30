@@ -27,6 +27,8 @@ while True:
                     instrument.serial.bytesize = mod['bytesize']
                     instrument.serial.stopbits = mod['stopbits']
                     instrument.serial.timeout = mod['timeout']
+         
+                    #instrument.debug = True
 
                     if mod['parity'] == "O":
                             instrument.serial.parity = serial.PARITY_ODD
@@ -38,13 +40,20 @@ while True:
                             instrument.serial.parity = serial.PARITY_NONE
 
                     writestring = ("{},{}").format(d.hour*60*60+d.minute*60+d.second,channel['channel'])
+                    try:
+                            writestring+= (",{}").format(instrument.read_string(103))
+                    except ValueError as e:
+                            print(e)
                     for register in mod['registers']:
                             writestring += ","
                             value = -1
                             if register['only'] == "" or register['only'] == channel['type']:
                                     if register['float'] != -1:
                                             try:
-                                                    value = instrument.read_float(register['float'])
+                                                    #value = instrument.read_float(register['float'])
+                                                    values = instrument.read_registers(register['float'],numberOfRegisters=2)
+                                                    registerstring = chr(values[1].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1]) + chr(values[0].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1])
+                                                    value = minmod._bytestringToFloat(registerstring)
                                             except ValueError as e:
                                                     print(e)
 

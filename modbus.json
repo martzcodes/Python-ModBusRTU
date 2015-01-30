@@ -1,6 +1,6 @@
 [
     {
-        "baudrate": 9600,
+        "baudrate": 38400,
         "bytesize": 8,
         "channels": [
             {
@@ -10,10 +10,50 @@
             {
                 "channel": 2,
                 "type": "return"
+            },
+            {
+                "channel": 3,
+                "type": "supply"
+            },
+            {
+                "channel": 4,
+                "type": "return"
+            },
+            {
+                "channel": 5,
+                "type": "supply"
+            },
+            {
+                "channel": 6,
+                "type": "return"
+            },
+            {
+                "channel": 7,
+                "type": "supply"
+            },
+            {
+                "channel": 8,
+                "type": "return"
+            },
+            {
+                "channel": 9,
+                "type": "ssdg"
+            },
+            {
+                "channel": 10,
+                "type": "ssdg"
+            },
+            {
+                "channel": 11,
+                "type": "ssdg"
+            },
+            {
+                "channel": 12,
+                "type": "ssdg"
             }
         ],
-        "comport": "COM5",
-        "parity": "O",
+        "comport": "COM3",
+        "parity": "N",
         "registers": [
             {
                 "factor": 28,
@@ -22,7 +62,8 @@
                 "offset": 18,
                 "only": "",
                 "register": 1,
-                "type": "scaled"
+                "type": "float",
+                "units": "GPH"
             },
             {
                 "factor": 29,
@@ -31,7 +72,8 @@
                 "offset": 19,
                 "only": "",
                 "register": 2,
-                "type": "scaled"
+                "type": "float",
+                "units":"kg/m3"
             },
             {
                 "factor": 31,
@@ -40,7 +82,8 @@
                 "offset": 21,
                 "only": "",
                 "register": 3,
-                "type": "scaled"
+                "type": "float",
+                "units":"F"
             },
             {
                 "factor": 32,
@@ -49,16 +92,8 @@
                 "offset": 22,
                 "only": "",
                 "register": 4,
-                "type": "scaled"
-            },
-            {
-                "factor": 33,
-                "float": -1,
-                "name": "Pressure",
-                "offset": 23,
-                "only": "",
-                "register": 6,
-                "type": "scaled"
+                "type": "float",
+                "units":"LPH"
             },
             {
                 "factor": 34,
@@ -67,7 +102,8 @@
                 "offset": 24,
                 "only": "",
                 "register": 7,
-                "type": "scaled"
+                "type": "float",
+                "units":"GAL"
             },
             {
                 "factor": 35,
@@ -76,7 +112,8 @@
                 "offset": 25,
                 "only": "",
                 "register": 8,
-                "type": "scaled"
+                "type": "float",
+                "units":"L"
             },
             {
                 "factor": 36,
@@ -85,7 +122,8 @@
                 "offset": 26,
                 "only": "",
                 "register": 9,
-                "type": "scaled"
+                "type": "float",
+                "units":"GAL"
             },
             {
                 "factor": 37,
@@ -94,7 +132,28 @@
                 "offset": 27,
                 "only": "",
                 "register": 10,
-                "type": "scaled"
+                "type": "float",
+                "units":"L"
+            },
+            {
+                "factor": 37,
+                "float": 4437,
+                "name": "Differential Mass Flow",
+                "offset": 27,
+                "only": "return",
+                "register": 10,
+                "type": "float",
+                "units":"GAL"
+            },
+            {
+                "factor": 37,
+                "float": 4439,
+                "name": "Differential Mass Total",
+                "offset": 27,
+                "only": "return",
+                "register": 10,
+                "type": "float",
+                "units":"GAL"
             }
         ],
         "stopbits": 1,

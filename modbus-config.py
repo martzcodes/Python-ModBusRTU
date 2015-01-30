@@ -28,15 +28,16 @@ for x in range(0,int(numchannels)):
 
 data['channels'] = channels
 
-registerstring = '[{"name":"Mass Flow Rate","register":1,"type":"scaled","offset":18,"factor":28,"float":246,"only":""},'
-registerstring += '{"name":"Density","register":2,"type":"scaled","offset":19,"factor":29,"float":248,"only":""},'
-registerstring += '{"name":"Temperature","register":3,"type":"scaled","offset":21,"factor":31,"float":250,"only":""},'
-registerstring += '{"name":"Volume Flow Rate","register":4,"type":"scaled","offset":22,"factor":32,"float":252,"only":""},'
-registerstring += '{"name":"Pressure","register":6,"type":"scaled","offset":23,"factor":33,"float":-1,"only":""},'
-registerstring += '{"name":"Mass Total","register":7,"type":"scaled","offset":24,"factor":34,"float":258,"only":""},'
-registerstring += '{"name":"Volume Total","register":8,"type":"scaled","offset":25,"factor":35,"float":260,"only":""},'
-registerstring += '{"name":"Mass Inventory","register":9,"type":"scaled","offset":26,"factor":36,"float":262,"only":""},'
-registerstring += '{"name":"Volume Inventory","register":10,"type":"scaled","offset":27,"factor":37,"float":264,"only":""}'
+registerstring = '[{"name":"Mass Flow Rate","register":1,"type":"float","offset":18,"factor":28,"float":246,"only":"","units":"GPH"},'
+registerstring += '{"name":"Density","register":2,"type":"float","offset":19,"factor":29,"float":248,"only":"","units":"kg/m3"},'
+registerstring += '{"name":"Temperature","register":3,"type":"float","offset":21,"factor":31,"float":250,"only":"","units":"F"},'
+registerstring += '{"name":"Volume Flow Rate","register":4,"type":"float","offset":22,"factor":32,"float":252,"only":"","units":"LPH"},'
+registerstring += '{"name":"Mass Total","register":7,"type":"float","offset":24,"factor":34,"float":258,"only":"","units":"GAL"},'
+registerstring += '{"name":"Volume Total","register":8,"type":"float","offset":25,"factor":35,"float":260,"only":"","units":"L"},'
+registerstring += '{"name":"Mass Inventory","register":9,"type":"float","offset":26,"factor":36,"float":262,"only":"","units":"GAL"},'
+registerstring += '{"name":"Volume Inventory","register":10,"type":"float","offset":27,"factor":37,"float":264,"only":"","units":"GAL"}'
+registerstring += '{"name":"Differential Mass Flow","register":9,"type":"float","offset":26,"factor":36,"float":4437,"only":"return","units":"GAL"},'
+registerstring += '{"name":"Differential Mass Total","register":10,"type":"float","offset":27,"factor":37,"float":4439,"only":"return","units":"GAL"}'
 registerstring += ']'
 
 data['registers'] = json.loads(registerstring)

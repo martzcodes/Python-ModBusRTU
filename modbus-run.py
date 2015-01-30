@@ -6,16 +6,18 @@ import datetime
 
 # check for modbus.json
 
-if not os.path.isfile('./modbus.json'):
+basepath = 'c:/ModBusData'
+
+if not os.path.isfile(basepath+'/modbus.json'):
 	print('No modbus.json found, please create one')
 	quit()
 
-if os.path.isfile('./modbus-should-be-running.txt'):
-        mods = json.load(open('./modbus.json'))
+if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
+        mods = json.load(open(basepath + '/modbus.json'))
 
         d = datetime.datetime.now()
 
-        datapath = './modbus-data/'
+        datapath = basepath + '/modbus-data/'
 
         if not os.path.isdir(datapath):
                 os.mkdir(datapath)
@@ -49,13 +51,24 @@ if os.path.isfile('./modbus-should-be-running.txt'):
                                 instrument.serial.parity = serial.PARITY_NONE
 
                         writestring = ("{},{}").format(d.hour*60*60+d.minute*60+d.second,channel['channel'])
+                        headerstring = "time,channel,name,"
+                        unitstring = "sec,#,,"
+                        try:
+                                writestring+= (",{}").format(instrument.read_string(103))
+                        except ValueError as e:
+                                print(e)
                         for register in mod['registers']:
+                                headerstring += ("{},").format(register['name'])
+                                unitstring += ("{},").format(register['units'])
                                 writestring += ","
-                                value = -1
+                                value = "NA"
                                 if register['only'] == "" or register['only'] == channel['type']:
-                                        if register['float'] != -1:
+                                        if register['float'] != "NA":
                                                 try:
-                                                        value = instrument.read_float(register['float'])
+                                                        #value = instrument.read_float(register['float'])
+                                                        values = instrument.read_registers(register['float'],numberOfRegisters=2)
+                                                        registerstring = chr(values[1].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1]) + chr(values[0].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1])
+                                                        value = minmod._bytestringToFloat(registerstring)
                                                 except ValueError as e:
                                                         print(e)
 
@@ -63,9 +76,18 @@ if os.path.isfile('./modbus-should-be-running.txt'):
 
                                 writestring += ("{}").format(value)
 
+                        headerstring += "\n"
+                        unitstring += "\n"
                         writestring += "\n"
                         print(writestring)
                         datafilepath = todaypath + ("{}-{}-{}.csv").format(d.year,d.month,d.day)
+                        if not os.path.isfile(datafilepath):
+                                print('No datafile, making one and adding header')
+                                datafile = open(datafilepath, 'w+')
+                                datafile.write(headerstring)
+                                datafile.write(unitstring)
+                                datafile.close()
+        
                         datafile = open(datafilepath, 'a')
                         datafile.write(writestring)
                         datafile.close()
