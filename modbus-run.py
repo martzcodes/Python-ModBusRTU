@@ -22,10 +22,10 @@ if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
         if not os.path.isdir(datapath):
                 os.mkdir(datapath)
 
-        todaypath = datapath + ('{}-{}/').format(d.year,d.month)
+        monthpath = datapath + ('{}-{}/').format(d.year,d.month)
 
-        if not os.path.isdir(todaypath):
-                os.mkdir(todaypath)
+        if not os.path.isdir(monthpath):
+                os.mkdir(monthpath)
 
         for mod in mods:
                 for channel in mod['channels']:
@@ -68,7 +68,7 @@ if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
                                                         #value = instrument.read_float(register['float'])
                                                         values = instrument.read_registers(register['float'],numberOfRegisters=2)
                                                         registerstring = chr(values[1].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1]) + chr(values[0].to_bytes(2,byteorder='big')[0]) + chr(values[1].to_bytes(2,byteorder='big')[1])
-                                                        value = minmod._bytestringToFloat(registerstring)
+                                                        value = minmod._bytestringToFloat(registerstring)*register['convert']
                                                 except ValueError as e:
                                                         print(e)
 
@@ -80,7 +80,10 @@ if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
                         unitstring += "\n"
                         writestring += "\n"
                         print(writestring)
-                        datafilepath = todaypath + ("{}-{}-{}.csv").format(d.year,d.month,d.day)
+                        if d.hour < mods['savetime']:
+                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day-1,mods['savetime'])
+                        else:
+                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day,mods['savetime'])
                         if not os.path.isfile(datafilepath):
                                 print('No datafile, making one and adding header')
                                 datafile = open(datafilepath, 'w+')
