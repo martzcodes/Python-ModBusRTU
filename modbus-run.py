@@ -50,9 +50,9 @@ if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
                         if mod['parity'] == "N":
                                 instrument.serial.parity = serial.PARITY_NONE
 
-                        writestring = ("{},{}").format(d.hour*60*60+d.minute*60+d.second,channel['channel'])
-                        headerstring = "time,channel,name,"
-                        unitstring = "sec,#,,"
+                        writestring = ("{},{},{},{},{}").format(d.day,d.hour,d.minute,d.hour*60*60+d.minute*60+d.second,channel['channel'])
+                        headerstring = "day,hour,min,time,channel,name,"
+                        unitstring = "day of month,hour,minute,seconds from midnight,#,,"
                         try:
                                 writestring+= (",{}").format(instrument.read_string(103))
                         except ValueError as e:
@@ -80,10 +80,10 @@ if os.path.isfile(basepath + '/modbus-should-be-running.txt'):
                         unitstring += "\n"
                         writestring += "\n"
                         print(writestring)
-                        if d.hour < mods['savetime']:
-                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day-1,mods['savetime'])
+                        if d.hour < mod['savetime']:
+                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day-1,mod['savetime'])
                         else:
-                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day,mods['savetime'])
+                                datafilepath = monthpath + ("{}-{}-{}+{}hr.csv").format(d.year,d.month,d.day,mod['savetime'])
                         if not os.path.isfile(datafilepath):
                                 print('No datafile, making one and adding header')
                                 datafile = open(datafilepath, 'w+')

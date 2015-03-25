@@ -20,42 +20,19 @@
                 "type": "return"
             },
             {
-                "channel": 5,
-                "type": "supply"
-            },
-            {
-                "channel": 6,
-                "type": "return"
-            },
-            {
-                "channel": 7,
-                "type": "supply"
-            },
-            {
-                "channel": 8,
-                "type": "return"
-            },
-            {
                 "channel": 9,
-                "type": "ssdg"
-            },
-            {
-                "channel": 10,
                 "type": "ssdg"
             },
             {
                 "channel": 11,
                 "type": "ssdg"
-            },
-            {
-                "channel": 12,
-                "type": "ssdg"
             }
         ],
-        "comport": "COM3",
+        "comport": "COM4",
         "parity": "N",
         "registers": [
             {
+                "convert": 3.316,
                 "factor": 28,
                 "float": 246,
                 "name": "Mass Flow Rate",
@@ -63,9 +40,10 @@
                 "only": "",
                 "register": 1,
                 "type": "float",
-                "units": "GPH"
+                "units": "kg/hr"
             },
             {
+                "convert": 1,
                 "factor": 29,
                 "float": 248,
                 "name": "Density",
@@ -73,9 +51,10 @@
                 "only": "",
                 "register": 2,
                 "type": "float",
-                "units":"kg/m3"
+                "units": "kg/m3"
             },
             {
+                "convert": 1,
                 "factor": 31,
                 "float": 250,
                 "name": "Temperature",
@@ -83,19 +62,10 @@
                 "only": "",
                 "register": 3,
                 "type": "float",
-                "units":"F"
+                "units": "F"
             },
             {
-                "factor": 32,
-                "float": 252,
-                "name": "Volume Flow Rate",
-                "offset": 22,
-                "only": "",
-                "register": 4,
-                "type": "float",
-                "units":"LPH"
-            },
-            {
+                "convert": 3.316,
                 "factor": 34,
                 "float": 258,
                 "name": "Mass Total",
@@ -103,19 +73,10 @@
                 "only": "",
                 "register": 7,
                 "type": "float",
-                "units":"GAL"
+                "units": "kg"
             },
             {
-                "factor": 35,
-                "float": 260,
-                "name": "Volume Total",
-                "offset": 25,
-                "only": "",
-                "register": 8,
-                "type": "float",
-                "units":"L"
-            },
-            {
+                "convert": 3.316,
                 "factor": 36,
                 "float": 262,
                 "name": "Mass Inventory",
@@ -123,29 +84,21 @@
                 "only": "",
                 "register": 9,
                 "type": "float",
-                "units":"GAL"
+                "units": "kg"
             },
             {
-                "factor": 37,
-                "float": 264,
-                "name": "Volume Inventory",
-                "offset": 27,
-                "only": "",
-                "register": 10,
-                "type": "float",
-                "units":"L"
-            },
-            {
-                "factor": 37,
+                "convert": 3.316,
+                "factor": 36,
                 "float": 4437,
                 "name": "Differential Mass Flow",
-                "offset": 27,
+                "offset": 26,
                 "only": "return",
-                "register": 10,
+                "register": 9,
                 "type": "float",
-                "units":"GAL"
+                "units": "kg"
             },
             {
+                "convert": 3.316,
                 "factor": 37,
                 "float": 4439,
                 "name": "Differential Mass Total",
@@ -153,9 +106,10 @@
                 "only": "return",
                 "register": 10,
                 "type": "float",
-                "units":"GAL"
+                "units": "kg"
             }
         ],
+        "savetime": 12,
         "stopbits": 1,
         "timeout": 0.5
     }
